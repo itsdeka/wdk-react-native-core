@@ -17,6 +17,7 @@ import {
   walletBalancesSchema,
   ethereumAddressSchema,
   sparkAddressSchema,
+  bitcoinAddressSchema,
   accountIndexSchema,
   networkNameSchema,
   balanceStringSchema,
@@ -96,10 +97,19 @@ export function isSparkAddress(value: unknown): value is string {
 }
 
 /**
- * Type guard to check if a value is a valid address (Ethereum or Spark format)
+ * Type guard to check if a value is a valid Bitcoin address
+ * Supports Legacy (P2PKH/P2SH), SegWit (Bech32), and Taproot (Bech32m) formats
+ * Uses Zod schema internally for validation
+ */
+export function isBitcoinAddress(value: unknown): value is string {
+  return bitcoinAddressSchema.safeParse(value).success
+}
+
+/**
+ * Type guard to check if a value is a valid address (Ethereum, Spark, or Bitcoin format)
  */
 export function isValidAddress(value: unknown): value is string {
-  return isEthereumAddress(value) || isSparkAddress(value)
+  return isEthereumAddress(value) || isSparkAddress(value) || isBitcoinAddress(value)
 }
 
 /**

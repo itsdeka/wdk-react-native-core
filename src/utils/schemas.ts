@@ -22,9 +22,25 @@ export const sparkAddressSchema = z.string().regex(/^spark(1|t1|rt1|test1)[a-z0-
 }).min(14).max(90)
 
 /**
- * Address schema (Ethereum or Spark)
+ * Bitcoin address schema
+ * Supports:
+ * - Legacy P2PKH (starts with 1)
+ * - P2SH (starts with 3)
+ * - Native SegWit Bech32 (starts with bc1q)
+ * - Taproot Bech32m (starts with bc1p)
+ * - Testnet addresses (starts with m, n, 2, or tb1)
  */
-export const addressSchema = z.union([ethereumAddressSchema, sparkAddressSchema])
+export const bitcoinAddressSchema = z.string().regex(
+  /^([13][a-km-zA-HJ-NP-Z1-9]{25,34}|bc1[a-z0-9]{39,59}|[mn2][a-km-zA-HJ-NP-Z1-9]{25,34}|tb1[a-z0-9]{39,59})$/,
+  {
+    message: 'Must be a valid Bitcoin address (Legacy, SegWit, or Taproot format)',
+  }
+)
+
+/**
+ * Address schema (Ethereum, Spark, or Bitcoin)
+ */
+export const addressSchema = z.union([ethereumAddressSchema, sparkAddressSchema, bitcoinAddressSchema])
 
 /**
  * Network configuration schema
