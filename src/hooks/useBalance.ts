@@ -280,8 +280,8 @@ export function useBalance(
   const workletStore = getWorkletStore()
   const walletStore = getWalletStore()
 
-  // Check if wallet is initialized
-  const isInitialized = workletStore.getState().isInitialized
+  // Check if wallet is initialized (reactive - re-renders when initialization state changes)
+  const isInitialized = workletStore((state) => state.isInitialized)
   
   // Get walletId from options or activeWalletId
   const activeWalletId = walletStore.getState().activeWalletId
@@ -368,7 +368,8 @@ export function useBalancesForWallet(
   options?: BalanceQueryOptions
 ) {
   const workletStore = getWorkletStore()
-  const isInitialized = workletStore.getState().isInitialized
+  // Reactive - re-renders when initialization state changes
+  const isInitialized = workletStore((state) => state.isInitialized)
 
   // Resolve walletId from options or store
   const walletId = resolveWalletId(options?.walletId)
@@ -460,7 +461,8 @@ export function useBalancesForWallets(
   options?: BalanceQueryOptions
 ) {
   const workletStore = getWorkletStore()
-  const isInitialized = workletStore.getState().isInitialized
+  // Reactive - re-renders when initialization state changes
+  const isInitialized = workletStore((state) => state.isInitialized)
 
   return useQueries({
     queries: wallets.map((wallet) => {
