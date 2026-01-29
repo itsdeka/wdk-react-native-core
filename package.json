@@ -51,7 +51,7 @@
     "@tetherto/wdk-react-native-secure-storage": "github:tetherto/wdk-react-native-secure-storage",
     "@tanstack/react-query": "^5.0.0",
     "expo-crypto": "^15.0.8",
-    "@tetherto/pear-wrk-wdk": "github:itsdeka/pear-wrk-wdk#3b214ee4705f607af369912ab76cbfe405dfc302",
+    "@tetherto/pear-wrk-wdk": "github:itsdeka/pear-wrk-wdk#b3e0b04563120d7d1ab184f2c72abc2b4c2887a7",
     "react-native-bare-kit": "^0.11.0",
     "react-native-mmkv": "^4.1.0",
     "zod": "^3.22.0",
